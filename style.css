@@ -1,0 +1,247 @@
+/* ============================================
+   CSS Variables
+   ============================================ */
+
+:root {
+	/* Colors */
+	--primary: #1b5e05;
+	--primary-hover: #78a400;
+	--primary-light: ##f1f8f0;
+	--neutral: #758066; /* https://clrbug.pages.dev/758066 */
+	--neutral-dark: #171b12; /* 900 */
+	--neutral-light: #f4f6f2; /* 100 */
+	--neutral-bg: #f8f9f6; /* 50 */
+	--secondary: #78a400;
+	--secondary-bg: #f1f9e7;
+
+	/* Spacing scale */
+	--spacer-1: 0.25rem;
+	--spacer-2: 0.625rem;
+	--spacer-3: 1.25rem;
+	--spacer-4: 2rem;
+	--spacer-5: 3rem;
+
+	--shadow-color: 180deg 15% 67%;
+
+	--shadow-elevation-medium: 0px 0.9px 1px hsl(var(--shadow-color) / 0.29),
+		0.2px 2.6px 2.9px -0.8px hsl(var(--shadow-color) / 0.29),
+		0.4px 6.5px 7.3px -1.7px hsl(var(--shadow-color) / 0.29),
+		0.9px 15.6px 17.6px -2.5px hsl(var(--shadow-color) / 0.29);
+}
+
+/* ============================================
+   Typography
+   ============================================ */
+
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+		Ubuntu, Cantarell, sans-serif;
+	font-size: 16px;
+	line-height: 1.5;
+	color: var(--neutral-dark);
+}
+
+h1 {
+	font-size: 1.5rem;
+	font-weight: 600;
+	margin: 0 0 var(--spacer-2) 0;
+	color: var(--neutral-dark);
+}
+
+h2 {
+	font-size: 1.25rem;
+	font-weight: 600;
+	margin: 0 0 var(--spacer-3) 0;
+	color: var(--neutral-dark);
+}
+
+p {
+	margin: 0;
+	margin-bottom: var(--spacer-2);
+	color: var(--neutral);
+}
+
+.help-text {
+	font-size: 0.875rem;
+	font-weight: 400;
+	color: var(--neutral);
+	margin: var(--spacer-1) 0 var(--spacer-2) 0;
+}
+
+/* ============================================
+   Layout
+   ============================================ */
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+	padding: var(--spacer-4);
+	background-color: var(--neutral-bg);
+}
+
+.container {
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+header {
+	margin-bottom: var(--spacer-5);
+}
+
+header p {
+	margin: 0;
+	color: var(--neutral);
+}
+
+main {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: var(--spacer-4);
+}
+
+@media (max-width: 960px) {
+	main {
+		grid-template-columns: 1fr;
+	}
+}
+
+.form-section {
+	background: #ffffff;
+	padding: var(--spacer-4);
+	border-radius: 12px;
+	/* box-shadow: var(--shadow-elevation-medium); */
+}
+
+.preview-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: var(--spacer-3);
+}
+
+.preview-header h2 {
+	margin: 0;
+}
+
+/* ============================================
+   Forms
+   ============================================ */
+
+.form-group {
+	margin-bottom: var(--spacer-3);
+}
+
+label {
+	display: block;
+	margin-bottom: var(--spacer-1);
+	font-weight: 500;
+	font-size: 0.875rem;
+	color: var(--neutral-dark);
+}
+
+input,
+select,
+textarea {
+	width: 100%;
+	padding: var(--spacer-2) var(--spacer-2);
+	border: 1px solid var(--neutral-light);
+	border-radius: 12px;
+	font-size: 1rem;
+	font-family: inherit;
+	color: var(--neutral-dark);
+	background-color: #ffffff;
+	transition: border-color 0.2s;
+	border: 2px solid var(--neutral-light);
+	&:active,
+	&:focus {
+		border-color: var(--secondary);
+		box-shadow: 0 0 0 3px var(--primary-light);
+	}
+}
+
+textarea {
+	resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+	outline: none;
+	border-color: var(--primary);
+	box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+input::placeholder,
+textarea::placeholder {
+	color: var(--neutral);
+}
+
+/* ============================================
+   Buttons
+   ============================================ */
+
+button {
+	padding: var(--spacer-2) var(--spacer-3);
+	background-color: var(--primary);
+	color: white;
+	border: none;
+	border-radius: 12px;
+	font-size: 0.875rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: background-color 0.2s;
+	font-family: inherit;
+}
+
+button:hover {
+	background-color: var(--primary-hover);
+}
+
+button:active {
+	background-color: var(--primary-hover);
+}
+
+button:focus {
+	outline: none;
+	box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+/* ============================================
+   Preview Area
+   ============================================ */
+
+.preview-area {
+	border-radius: 4px;
+	padding: var(--spacer-3);
+	background-color: #ffffff;
+	min-height: 200px;
+	box-shadow: var(--shadow-elevation-medium);
+	border-radius: 12px;
+}
+
+.copy-feedback {
+	margin-top: var(--spacer-2);
+	padding: var(--spacer-2);
+	text-align: center;
+	font-size: 0.875rem;
+	border-radius: 4px;
+	opacity: 0;
+	transition: opacity 0.3s;
+}
+
+.copy-feedback.show {
+	opacity: 1;
+}
+
+.copy-feedback.success {
+	background-color: var(--secondary-bg);
+	color: var(--neutral-dark);
+}
+
+.copy-feedback.error {
+	background-color: #fee2e2;
+	color: #991b1b;
+}

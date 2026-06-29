@@ -1,0 +1,11 @@
+{
+	"name": "if-email-sig",
+	"version": "1.0.0",
+	"description": "Email signature generator for Indigenous Futures",
+	"scripts": {
+		"start": "serve ."
+	},
+	"devDependencies": {
+		"serve": "^14.0.0"
+	}
+}
