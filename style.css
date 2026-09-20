@@ -3,14 +3,39 @@
    ============================================ */
 
 :root {
+
+	/* `neutral` palette generated at https://clrbug.pages.dev/758066 */
+
+	--neutral-25: #f8f9f6;
+	--neutral-50: #f8f9f6;
+	--neutral-100: #f5f6f3;
+	--neutral-150: #ebeee7;
+	--neutral-200: #e1e5dc;
+	--neutral-250: #d5dacf;
+	--neutral-300: #c9cfc1;
+	--neutral-350: #bac1b1;
+	--neutral-400: #abb3a0;
+	--neutral-450: #9aa38e;
+	--neutral-500: #8a947c;
+	--neutral-550: #758066; /* anchor */
+	--neutral-600: #626c55;
+	--neutral-650: #525b47;
+	--neutral-700: #434b39;
+	--neutral-750: #373e2e;
+	--neutral-800: #2b3124;
+	--neutral-850: #24281d;
+	--neutral-900: #1c2016;
+	--neutral-950: #0d1009;
+	--neutral-975: #020302;
+
 	/* Colors */
 	--primary: #1b5e05;
 	--primary-hover: #78a400;
 	--primary-light: #f1f8f0;
 	--neutral: #758066; /* https://clrbug.pages.dev/758066 */
-	--neutral-dark: #171b12; /* 900 */
-	--neutral-light: #f4f6f2; /* 100 */
-	--neutral-bg: #f8f9f6; /* 50 */
+	--neutral-dark: var(--neutral-900); /* 900 */
+	--neutral-light: var(--neutral-100); /* 100 */
+	--neutral-bg: var(--neutral-25); /* 50 */
 	--secondary: #78a400;
 	--secondary-bg: #f1f9e7;
 
@@ -299,8 +324,96 @@ button:focus {
 	background-color: var(--neutral-bg);
 }
 
+/* ============================================
+   Colour palette
+   ============================================ */
+
+.palette-section {
+	background-color: var(--neutral-150);
+}
+
+.palette-section h2 {
+	margin-bottom: var(--spacer-2);
+}
+
+.palette-section > .container > p {
+	margin-bottom: var(--spacer-3);
+}
+
+.palette-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+	gap: var(--spacer-3);
+}
+
+.swatch {
+	display: block;
+	width: 100%;
+	padding: 0;
+	text-align: left;
+	background: var(--neutral-bg);
+	color: inherit;
+	font-size: inherit;
+	font-weight: inherit;
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: var(--shadow-elevation-medium);
+}
+
+.swatch:hover,
+.swatch:active {
+	background: var(--neutral-bg);
+}
+
+.swatch-chip {
+	display: block;
+	height: 5rem;
+}
+
+.swatch-chip--light {
+	box-shadow: inset 0 0 0 1px var(--neutral-light);
+}
+
+.swatch-meta {
+	display: block;
+	padding: var(--spacer-2) var(--spacer-3) var(--spacer-3);
+}
+
+.swatch-name {
+	display: block;
+	font-weight: 500;
+	color: var(--neutral-dark);
+	margin-bottom: var(--spacer-1);
+}
+
+.swatch-hex {
+	display: block;
+	font-size: 0.875rem;
+	font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+	color: var(--neutral);
+	margin-bottom: var(--spacer-2);
+}
+
+.swatch-copy {
+	display: block;
+	width: 100%;
+	padding: var(--spacer-1) var(--spacer-2);
+	font-size: 0.8125rem;
+	font-weight: 500;
+	text-align: center;
+	background-color: var(--primary);
+	color: white;
+	border-radius: 12px;
+}
+
+.swatch:hover .swatch-copy,
+.swatch:active .swatch-copy {
+	background-color: var(--primary-hover);
+}
+
 .howto-section {
 	background-color: #ffffff;
+	border-top: 1px solid var(--neutral-light);
 }
 
 .howto-intro {

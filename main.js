@@ -316,3 +316,90 @@ copyButton.addEventListener("click", copyToClipboard);
 // Load saved data and initialize preview on page load
 loadFormData();
 updatePreview();
+
+// ============================================
+// Colour palette
+// ============================================
+
+const paletteGrid = document.getElementById("palette-grid");
+
+function isLightHex(hex) {
+	const h = hex.replace("#", "");
+	const r = parseInt(h.slice(0, 2), 16);
+	const g = parseInt(h.slice(2, 4), 16);
+	const b = parseInt(h.slice(4, 6), 16);
+	const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+	return luminance > 0.85;
+}
+
+async function copyHex(hex, label) {
+	const originalLabel = label.textContent;
+	try {
+		await navigator.clipboard.writeText(hex);
+		label.textContent = "Copied!";
+	} catch (err) {
+		label.textContent = "Failed";
+	}
+	setTimeout(() => {
+		label.textContent = originalLabel;
+	}, 1500);
+}
+
+function renderPalette(colors) {
+	paletteGrid.innerHTML = "";
+
+	colors.forEach((color) => {
+		const card = document.createElement("button");
+		card.type = "button";
+		card.className = "swatch";
+		card.setAttribute("aria-label", `Copy ${color.hex}`);
+
+		const chip = document.createElement("span");
+		chip.className = "swatch-chip";
+		if (isLightHex(color.hex)) {
+			chip.classList.add("swatch-chip--light");
+		}
+		chip.style.backgroundColor = color.hex;
+		chip.setAttribute("aria-hidden", "true");
+
+		const meta = document.createElement("span");
+		meta.className = "swatch-meta";
+
+		const name = document.createElement("span");
+		name.className = "swatch-name";
+		name.textContent = color.name;
+
+		const hex = document.createElement("span");
+		hex.className = "swatch-hex";
+		hex.textContent = color.hex;
+
+		const copyLabel = document.createElement("span");
+		copyLabel.className = "swatch-copy";
+		copyLabel.textContent = "Copy";
+		copyLabel.setAttribute("aria-hidden", "true");
+
+		card.addEventListener("click", () => copyHex(color.hex, copyLabel));
+
+		meta.append(name, hex, copyLabel);
+		card.append(chip, meta);
+		paletteGrid.appendChild(card);
+	});
+}
+
+async function loadPalette() {
+	if (!paletteGrid) return;
+
+	try {
+		const response = await fetch("colors.json");
+		if (!response.ok) {
+			throw new Error("Failed to load colours");
+		}
+		const colors = await response.json();
+		renderPalette(colors);
+	} catch (err) {
+		console.error("Failed to load colour palette:", err);
+		paletteGrid.textContent = "Could not load colours.";
+	}
+}
+
+loadPalette();
